@@ -13,3 +13,10 @@
     ```
     docker-compose up -d --build
    ```
+
+## Tests
+Before running the tests, do this;
+```bash
+docker compose exec app php bin/console --env=test doctrine:database:create --if-not-exists
+docker compose exec app php bin/console --env=test doctrine:migrations:migrate -n
+```

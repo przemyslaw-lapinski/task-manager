@@ -8,6 +8,14 @@ class JWTLoginTest extends WebTestCase
     public function testLoginWithValidCredentialsReturnsJWT(): void
     {
         $client = static::createClient();
+
+        $user = new \App\Entity\User();
+        $user->setEmail('test@example.com');
+        $user->setPassword('test1234');
+        $entityManager = static::getContainer()->get('doctrine')->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
         $client->request('POST', '/api/login', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
             'email' => 'test@example.com',
             'password' => 'test1234',
@@ -23,6 +31,14 @@ class JWTLoginTest extends WebTestCase
     public function testLoginWithInvalidCredentialsReturnsError(): void
     {
         $client = static::createClient();
+
+        $user = new \App\Entity\User();
+        $user->setEmail('test@example.com');
+        $user->setPassword('test1234');
+        $entityManager = static::getContainer()->get('doctrine')->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
         $client->request('POST', '/api/login', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
             'email' => 'test@example.com',
             'password' => 'wrongpassword',
@@ -32,4 +48,3 @@ class JWTLoginTest extends WebTestCase
         $this->assertSame(401, $response->getStatusCode());
     }
 }
-
