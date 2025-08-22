@@ -19,6 +19,12 @@
     docker compose up -d --build
     docker compose exec app composer install --optimize-autoloader --no-interaction
    ```
+   
+5. Database:
+    ```bash
+    docker compose exec app php bin/console doctrine:database:create --if-not-exists
+    docker compose exec app php bin/console doctrine:migrations:migrate
+    ```
 
 ## Tests
 Before running the tests, do this;
