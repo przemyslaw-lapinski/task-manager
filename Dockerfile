@@ -1,5 +1,8 @@
 FROM php:8.4-fpm
 
+# Install Composer
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -15,8 +18,10 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     && docker-php-ext-install intl pdo pdo_pgsql zip opcache
 
-# Install Composer
-COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Set working directory
 WORKDIR /var/www/html
@@ -24,11 +29,7 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-interaction
-
-# Set permissions for Symfony
-RUN chown -R www-data:www-data var vendor
+USER www
 
 # Expose port for PHP-FPM
 EXPOSE 9000

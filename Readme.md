@@ -9,9 +9,15 @@
    ```bash
    cd task-manager
    ```
-3. Docker:
+3. Env:
+    ```bash
+    cp .env .env.local
     ```
-    docker-compose up -d --build
+    Update the `.env` file with your database credentials and other necessary configurations.
+4. Docker:
+    ```
+    docker compose up -d --build
+    docker compose exec app composer install --optimize-autoloader --no-interaction
    ```
 
 ## Tests
