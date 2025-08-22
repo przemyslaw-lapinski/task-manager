@@ -25,6 +25,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'json', nullable: true)]
+    private ?array $details = null;
+
     #[ORM\OneToMany(mappedBy: 'assignee', targetEntity: Task::class)]
     private Collection $tasks;
 
@@ -46,6 +49,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    public function getDetails(): ?array
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?array $details): static
+    {
+        $this->details = $details;
         return $this;
     }
 

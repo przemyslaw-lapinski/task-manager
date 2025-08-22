@@ -47,4 +47,30 @@ class JWTLoginTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertSame(401, $response->getStatusCode());
     }
+
+    public function testImportedUserCanAuthenticate(): void
+    {
+        $client = static::createClient();
+        $kernel = self::bootKernel();
+        $application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $application->setAutoExit(false);
+
+        $application->run(new \Symfony\Component\Console\Input\ArrayInput([
+            'command' => 'app:fetch-users',
+        ]));
+
+        $email = 'Sincere@april.biz';
+        $password = 'secret123';
+
+        $client->request('POST', '/api/login', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
+            'email' => $email,
+            'password' => $password,
+        ]));
+
+        $response = $client->getResponse();
+        $this->assertResponseIsSuccessful();
+        $data = json_decode($response->getContent(), true);
+        $this->assertArrayHasKey('token', $data);
+        $this->assertNotEmpty($data['token']);
+    }
 }
