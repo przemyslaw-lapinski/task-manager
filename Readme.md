@@ -26,6 +26,11 @@
     docker compose exec app php bin/console doctrine:migrations:migrate
     ```
 
+6. Fake users from jsonplaceholder API:
+    ```bash
+    docker compose exec app php bin/console app:import-users
+    ```
+
 ## Tests
 Before running the tests, do this;
 ```bash
