@@ -1,0 +1,7 @@
+Query:
+    type: object
+    config:
+        fields:
+            hello:
+                type: "String!"
+                resolve: '@=call("App\\GraphQL\\Resolver\\QueryResolver::hello")'

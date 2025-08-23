@@ -1,0 +1,14 @@
+Mutation:
+    type: object
+    config:
+        description: "Root mutation"
+        fields:
+            ping:
+                type: "String!"
+                resolve: '@=call("App\\GraphQL\\Resolver\\MutationResolver::ping")'
+
+            reverse:
+                type: "String!"
+                args:
+                    input: "String!"
+                resolve: '@=service("App\\GraphQL\\Resolver\\MutationResolver").reverse(args["input"])'

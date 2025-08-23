@@ -23,7 +23,12 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
-            pattern: ^/(api|graphql)
+            pattern: ^/(api)
+            stateless: true
+            jwt: ~
+
+        graphql:
+            pattern: ^/graphql
             stateless: true
             jwt: ~
 
