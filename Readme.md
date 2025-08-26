@@ -28,7 +28,7 @@
 
 6. Fake users from jsonplaceholder API:
     ```bash
-    docker compose exec app php bin/console app:import-users
+    docker compose exec app php bin/console app:fetch-users
     ```
 
 ## Tests
