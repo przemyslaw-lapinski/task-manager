@@ -4,7 +4,6 @@ namespace App\Domain\Event;
 
 use App\Domain\ValueObject\TaskId;
 use App\Domain\ValueObject\TaskStatus;
-use App\Domain\ValueObject\UserId;
 
 class TaskStatusUpdated
 {
@@ -52,11 +51,6 @@ class TaskStatusUpdated
     public function getTaskId(): TaskId
     {
         return $this->taskId;
-    }
-
-    public function getUserId(): UserId
-    {
-        return $this->userId;
     }
 
     public function getFrom(): TaskStatus
