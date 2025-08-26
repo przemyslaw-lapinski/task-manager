@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\ValueObject;
+namespace App\Domain\Task\ValueObject;
 
-class UserId
+class TaskId
 {
     private function __construct(private string $id)
     {

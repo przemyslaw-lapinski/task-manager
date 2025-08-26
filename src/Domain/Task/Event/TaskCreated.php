@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Domain\Event;
+namespace App\Domain\Task\Event;
 
-use App\Domain\ValueObject\TaskId;
-use App\Domain\ValueObject\TaskStatus;
-use App\Domain\ValueObject\UserId;
+use App\Domain\Common\Event\DomainEvent;
+use App\Domain\Task\ValueObject\TaskId;
+use App\Domain\Task\ValueObject\TaskStatus;
+use App\Domain\Task\ValueObject\UserId;
 
-class TaskCreated
+class TaskCreated implements DomainEvent
 {
     public function __construct(
         private TaskId $taskId,
-        private UserId $userId,
+        private UserId $assignedUserId,
         private string $title,
         private string $description,
         private TaskStatus $status,
@@ -23,9 +24,9 @@ class TaskCreated
         return $this->taskId;
     }
 
-    public function getUserId(): UserId
+    public function getAssignedUserId(): UserId
     {
-        return $this->userId;
+        return $this->assignedUserId;
     }
 
     public function getTitle(): string
@@ -53,15 +54,14 @@ class TaskCreated
         UserId $userId,
         string $title,
         string $description,
-        TaskStatus $status
     ): self {
         return new self(
             $taskId,
             $userId,
             $title,
             $description,
-            $status,
-            new \DateTimeImmutable()
+            $status = TaskStatus::TODO,
+            new \DateTimeImmutable(),
         );
     }
 
@@ -69,10 +69,10 @@ class TaskCreated
     {
         return [
             'taskId' => (string) $this->taskId,
-            'userId' => (string) $this->userId,
+            'assignedUserId' => (string) $this->assignedUserId,
             'title' => $this->title,
             'description' => $this->description,
-            'status' => (string) $this->status,
+            'status' => $this->status->value,
             'occurredAt' => $this->occurredAt->format('Y-m-d H:i:s'),
         ];
     }
@@ -81,7 +81,7 @@ class TaskCreated
     {
         return new self(
             TaskId::fromString($payload['taskId']),
-            UserId::fromString($payload['userId']),
+            UserId::fromString($payload['assignedUserId']),
             $payload['title'],
             $payload['description'],
             TaskStatus::fromString($payload['status']),

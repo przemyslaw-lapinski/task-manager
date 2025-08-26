@@ -5,17 +5,20 @@ namespace App\Entity;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private ?Uuid $id = null;
 
     #[ORM\Column(type: 'uuid', nullable: true)]
-    private ?Uuid $aggregate_id = null;
+    private ?Uuid $aggregateId = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $aggregateType = null;
@@ -35,19 +38,19 @@ class Event
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
 
     public function getAggregateId(): ?Uuid
     {
-        return $this->aggregate_id;
+        return $this->aggregateId;
     }
 
-    public function setAggregateId(?Uuid $aggregate_id): static
+    public function setAggregateId(?Uuid $aggregateId): static
     {
-        $this->aggregate_id = $aggregate_id;
+        $this->aggregateId = $aggregateId;
 
         return $this;
     }

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Domain\ValueObject;
+namespace App\Domain\Task\ValueObject;
 
 enum TaskStatus: string
 {
-    case PENDING = 'PENDING';
+    case TODO = 'TODO';
     case IN_PROGRESS = 'IN_PROGRESS';
-    case COMPLETED = 'COMPLETED';
+    case DONE = 'DONE';
 
     public static function fromString(string $status): self
     {
         return match (strtoupper($status)) {
-            'PENDING' => self::PENDING,
+            'TODO' => self::TODO,
             'IN_PROGRESS' => self::IN_PROGRESS,
-            'COMPLETED' => self::COMPLETED,
+            'DONE' => self::DONE,
             default => throw new \InvalidArgumentException("Invalid task status: $status"),
         };
     }

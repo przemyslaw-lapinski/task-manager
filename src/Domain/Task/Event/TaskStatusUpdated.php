@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Domain\Event;
+namespace App\Domain\Task\Event;
 
-use App\Domain\ValueObject\TaskId;
-use App\Domain\ValueObject\TaskStatus;
+use App\Domain\Common\Event\DomainEvent;
+use App\Domain\Task\ValueObject\TaskId;
+use App\Domain\Task\ValueObject\TaskStatus;
 
-class TaskStatusUpdated
+class TaskStatusUpdated implements DomainEvent
 {
     public function __construct(
         private TaskId $taskId,

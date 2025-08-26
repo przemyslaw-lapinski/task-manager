@@ -1,0 +1,5 @@
+services:
+    App\Domain\Task\Service\TaskDomainService:
+        public: true
+        autowire: true
+        autoconfigure: true
