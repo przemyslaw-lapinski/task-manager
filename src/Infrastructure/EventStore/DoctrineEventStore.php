@@ -25,13 +25,11 @@ class DoctrineEventStore implements TaskEventSourcedRepositoryInterface
     {
         /** @var Event[] $records */
         $records = $this->events->createQueryBuilder('e')
-            ->where('e.aggregate_id = :id')
+            ->where('e.aggregateId = :id')
             ->andWhere('e.aggregateType = :type')
             ->orderBy('e.version', 'ASC')
-            ->setParameters([
-                'id'   => Uuid::fromString($id),
-                'type' => $this->aggregateType,
-            ])
+            ->setParameter('id', Uuid::fromString((string) $id))
+            ->setParameter('type', $this->aggregateType)
             ->getQuery()
             ->getResult();
 

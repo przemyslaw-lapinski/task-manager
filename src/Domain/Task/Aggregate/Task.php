@@ -78,34 +78,22 @@ class Task
         return $e;
     }
 
-    public static function create(
-        TaskId $id,
-        UserId $assignedUserId,
-        string $title,
-        string $description,
-        TaskStatus $status
-    ): self {
-        $task = new self(
-            id: $id,
-            assignedUserId: $assignedUserId,
-            title: $title,
-            description: $description,
-            status: $status
-        );
-//        $task->record(new TaskCreated($id, $name, $description, $assignedUserId));
-        //TODO:
-
-        return $task;
-    }
-
-    public function changeStatus(TaskStatus $newStatus, StatusTransitionStrategy $strategy): void
+    public function changeStatus(TaskStatus $newStatus, StatusTransitionStrategy $strategy): self
     {
         if ($this->status === $newStatus) {
-            return;
+            throw new \RuntimeException('Status is already ' . $newStatus->toString());
         }
 
-        $oldStatus = $this->status;
-//        $this->record(new TaskStatusUpdated($this->id, $oldStatus, $newStatus));
-        //TODO:
+        if (!$strategy->canTransition($this->status, $newStatus)) {
+            throw new \RuntimeException(sprintf(
+                'Invalid status transition from %s to %s',
+                $this->status,
+                $newStatus
+            ));
+        }
+
+        $this->record(TaskStatusUpdated::now($this->id, $this->status, $newStatus, new \DateTimeImmutable()));
+
+        return $this;
     }
 }

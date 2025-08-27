@@ -30,7 +30,7 @@ class TaskDomainService
     public function changeStatus(TaskId $taskId, TaskStatus $to, ?UserId $actor = null): void
     {
         $task = $this->repo->load($taskId);
-        $task->changeStatus($to, $this->strategy);
+        $task = $task->changeStatus($to, $this->strategy);
 
         $this->repo->save($task);
     }
