@@ -3,7 +3,7 @@
 namespace App\Infrastructure\EventStore;
 
 use App\Domain\Common\Event\DomainEvent;
-use App\Domain\Task\Aggregate\Task;
+use App\Domain\Task\Model\Task;
 use App\Domain\Task\Repository\TaskEventSourcedRepositoryInterface;
 use App\Domain\Task\ValueObject\TaskId;
 use App\Entity\Event;

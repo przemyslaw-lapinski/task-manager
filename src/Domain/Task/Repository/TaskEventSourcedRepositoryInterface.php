@@ -2,7 +2,7 @@
 
 namespace App\Domain\Task\Repository;
 
-use App\Domain\Task\Aggregate\Task;
+use App\Domain\Task\Model\Task;
 use App\Domain\Task\ValueObject\TaskId;
 
 interface TaskEventSourcedRepositoryInterface

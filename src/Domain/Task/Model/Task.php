@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Task\Aggregate;
+namespace App\Domain\Task\Model;
 
 use App\Domain\Task\Event\TaskCreated;
 use App\Domain\Task\Event\TaskStatusUpdated;
