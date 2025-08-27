@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Task\Handler;
+namespace App\Application\Task\Handler;
 
-use App\Domain\Task\Command\CreateTaskCommand;
+use App\Application\Task\Command\CreateTaskCommand;
 use App\Domain\Task\Service\TaskDomainService;
 use App\Domain\Task\ValueObject\UserId;
 

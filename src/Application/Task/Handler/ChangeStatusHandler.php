@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Domain\Task\Handler;
+namespace App\Application\Task\Handler;
 
-use App\Domain\Task\Command\ChangeStatusCommand;
+use App\Application\Task\Command\ChangeStatusCommand;
 use App\Domain\Task\Service\TaskDomainService;
 use App\Domain\Task\ValueObject\TaskId;
 use App\Domain\Task\ValueObject\TaskStatus;
-use App\Domain\Task\ValueObject\UserId;
 
 class ChangeStatusHandler
 {

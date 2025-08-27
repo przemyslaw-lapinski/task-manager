@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Task\Command;
+namespace App\Application\Task\Command;
 
 class ChangeStatusCommand
 {
