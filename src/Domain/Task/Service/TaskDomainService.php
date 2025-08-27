@@ -17,7 +17,7 @@ class TaskDomainService
         private StatusTransitionStrategy $strategy,
     ) {}
 
-    public function createTask(string $name, string $desc, UserId $assigned, ?UserId $actor = null): TaskId
+    public function createTask(string $name, string $desc, UserId $assigned): TaskId
     {
         $id = TaskId::fromString(\Symfony\Component\Uid\Uuid::v7());
         $task = $this->factory->create($id, $name, $desc, $assigned);
@@ -27,7 +27,7 @@ class TaskDomainService
         return $id;
     }
 
-    public function changeStatus(TaskId $taskId, TaskStatus $to, ?UserId $actor = null): void
+    public function changeStatus(TaskId $taskId, TaskStatus $to): void
     {
         $task = $this->repo->load($taskId);
         $task = $task->changeStatus($to, $this->strategy);

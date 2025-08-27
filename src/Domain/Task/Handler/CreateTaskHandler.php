@@ -15,8 +15,7 @@ class CreateTaskHandler
         return $this->service->createTask(
             $command->name,
             $command->description,
-            UserId::fromString($command->assignedUserId),
-            UserId::fromString($command->actorUserId),
+            UserId::fromString($command->assignedUserId)
         );
     }
 }

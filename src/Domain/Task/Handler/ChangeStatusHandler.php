@@ -16,8 +16,7 @@ class ChangeStatusHandler
     {
         $this->service->changeStatus(
             TaskId::fromString($command->taskId),
-            TaskStatus::fromString($command->toStatus),
-            UserId::fromString($command->actorUserId),
+            TaskStatus::fromString($command->toStatus)
         );
     }
 }

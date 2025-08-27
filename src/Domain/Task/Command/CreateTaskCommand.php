@@ -7,7 +7,6 @@ class CreateTaskCommand
     public function __construct(
         public string $name,
         public string $description,
-        public string $assignedUserId,
-        public string $actorUserId
+        public string $assignedUserId
     ) {}
 }
