@@ -101,4 +101,24 @@ class DoctrineEventStore implements TaskEventSourcedRepositoryInterface
             throw $e;
         }
     }
+
+    public function stream(TaskId $id): iterable
+    {
+        $repo = $this->em->getRepository(Event::class);
+
+        /** @var Event[] $records */
+        $records = $repo->createQueryBuilder('e')
+            ->where('e.aggregateId = :id')
+            ->andWhere('e.aggregateType = :type')
+            ->orderBy('e.version', 'ASC')
+            ->setParameter('id', Uuid::fromString((string) $id))
+            ->setParameter('type', $this->aggregateType)
+            ->getQuery()
+            ->getResult();
+
+        foreach ($records as $rec) {
+            yield $rec;
+        }
+    }
+
 }

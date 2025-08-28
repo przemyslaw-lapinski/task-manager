@@ -1,0 +1,26 @@
+TaskStatus:
+    type: enum
+    config:
+        values:
+            TODO: { value: "TODO" }
+            IN_PROGRESS: { value: "IN_PROGRESS" }
+            DONE: { value: "DONE" }
+
+Task:
+    type: object
+    config:
+        fields:
+            id:              { type: "ID!" }
+            title:            { type: "String!" }
+            description:     { type: "String!" }
+            status:          { type: "TaskStatus!" }
+            assignedUserId:  { type: "ID!" }
+            updatedAt:       { type: "String!" }
+
+TaskHistoryItem:
+    type: object
+    config:
+        fields:
+            event:      { type: "String!" }
+            payload:    { type: "String!" }
+            recordedAt: { type: "String!" }
