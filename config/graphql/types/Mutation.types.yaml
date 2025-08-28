@@ -14,7 +14,7 @@ Mutation:
                 resolve: '@=service("App\\UI\\GraphQL\\Resolver\\MutationResolver").reverse(args["input"])'
 
             createTask:
-                type: "ID!"
+                type: "Boolean!"
                 args:
                     title: "String!"
                     description: "String!"

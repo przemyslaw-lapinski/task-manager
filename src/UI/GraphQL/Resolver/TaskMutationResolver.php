@@ -12,7 +12,7 @@ class TaskMutationResolver
         private MessageBusInterface $bus
     ) {}
 
-    public function createTask(\Overblog\GraphQLBundle\Definition\Argument $args): string
+    public function createTask(\Overblog\GraphQLBundle\Definition\Argument $args): bool
     {
        $args = $args->getArrayCopy();
 
