@@ -8,7 +8,7 @@ use App\Tests\Helpers\UserTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Uid\Uuid;
 
-class TaskQueryResolverTest extends WebTestCase
+class TaskMutationResolverTest extends WebTestCase
 {
     use GraphQLTrait, UserTrait, AuthTrait;
 
