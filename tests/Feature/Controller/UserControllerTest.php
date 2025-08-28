@@ -2,22 +2,13 @@
 
 namespace App\Tests\Feature\Controller;
 
+use App\Tests\Helpers\AuthTrait;
 use App\Tests\Helpers\UserTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
-    use UserTrait;
-
-    private function getJwtToken($client, $email, $password = 'password')
-    {
-        $client->request('POST', '/api/login', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
-            'email' => $email,
-            'password' => $password,
-        ]));
-        $data = json_decode($client->getResponse()->getContent(), true);
-        return $data['token'] ?? null;
-    }
+    use UserTrait, AuthTrait;
 
     public function testMeEndpointAuthenticated()
     {
