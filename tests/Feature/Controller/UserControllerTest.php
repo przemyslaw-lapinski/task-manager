@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\Feature\Controller;
 
 use App\Tests\Helpers\UserTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
