@@ -1,5 +1,5 @@
 <?php
-namespace App\Infrastructure\Command;
+namespace App\UI\Command;
 
 use App\Infrastructure\Entity\User;
 use App\Infrastructure\Service\APIClient;
