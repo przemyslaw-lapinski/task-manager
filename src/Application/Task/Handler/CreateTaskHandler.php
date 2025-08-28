@@ -5,7 +5,9 @@ namespace App\Application\Task\Handler;
 use App\Application\Task\Command\CreateTaskCommand;
 use App\Domain\Task\Service\TaskDomainService;
 use App\Domain\Task\ValueObject\UserId;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 class CreateTaskHandler
 {
     public function __construct(private readonly TaskDomainService $service) {}
