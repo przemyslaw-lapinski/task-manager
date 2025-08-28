@@ -8,6 +8,7 @@ use App\Domain\Task\Repository\TaskEventSourcedRepositoryInterface;
 use App\Domain\Task\ValueObject\TaskId;
 use App\Entity\Event;
 use App\Infrastructure\EventStore\Support\EventNameResolver;
+use App\Infrastructure\Projection\TaskProjector;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Uuid;
@@ -18,6 +19,7 @@ class DoctrineEventStore implements TaskEventSourcedRepositoryInterface
         private EntityManagerInterface $em,
         private EventRepository $events,
         private EventNameResolver $nameResolver,
+        private TaskProjector $projector,
         private string $aggregateType = 'task'
     ) {}
 
@@ -43,7 +45,6 @@ class DoctrineEventStore implements TaskEventSourcedRepositoryInterface
             /** @var class-string<DomainEvent> $fqcn */
             $domainEvents[] = $fqcn::fromPayload(
                 $rec->getPayload(),
-                $rec->getCreatedAt() ?? new \DateTimeImmutable('@0')
             );
         }
 
@@ -86,6 +87,11 @@ class DoctrineEventStore implements TaskEventSourcedRepositoryInterface
             }
 
             $this->em->flush();
+
+            foreach ($uncommitted as $event) {
+                $this->projector->project($event);
+            }
+
             $conn->commit();
         } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
             $conn->rollBack();
