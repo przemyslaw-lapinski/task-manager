@@ -1,8 +1,8 @@
 <?php
-namespace App\Command;
+namespace App\Infrastructure\Command;
 
-use App\Entity\User;
-use App\Service\APIClient;
+use App\Infrastructure\Entity\User;
+use App\Infrastructure\Service\APIClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

@@ -9,7 +9,7 @@ class JWTLoginTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $user = new \App\Entity\User();
+        $user = new \App\Infrastructure\Entity\User();
         $user->setEmail('test@example.com');
         $user->setPassword('test1234');
         $entityManager = static::getContainer()->get('doctrine')->getManager();
@@ -32,7 +32,7 @@ class JWTLoginTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $user = new \App\Entity\User();
+        $user = new \App\Infrastructure\Entity\User();
         $user->setEmail('test@example.com');
         $user->setPassword('test1234');
         $entityManager = static::getContainer()->get('doctrine')->getManager();

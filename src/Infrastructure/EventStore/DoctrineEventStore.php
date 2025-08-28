@@ -6,10 +6,10 @@ use App\Domain\Common\Event\DomainEvent;
 use App\Domain\Task\Model\Task;
 use App\Domain\Task\Repository\TaskEventSourcedRepositoryInterface;
 use App\Domain\Task\ValueObject\TaskId;
-use App\Entity\Event;
+use App\Infrastructure\Entity\Event;
 use App\Infrastructure\EventStore\Support\EventNameResolver;
 use App\Infrastructure\Projection\TaskProjector;
-use App\Repository\EventRepository;
+use App\Infrastructure\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Uuid;
 

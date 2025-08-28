@@ -2,8 +2,7 @@
 
 namespace App\Tests\Integration\Domain;
 
-use App\Domain\Task\ValueObject\UserId;
-use App\Entity\Event;
+use App\Infrastructure\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Uuid;
 
@@ -23,9 +22,9 @@ class TaskDomainServiceTest extends KernelTestCase
         $this->assertInstanceOf(\App\Domain\Task\ValueObject\TaskId::class, $taskId);
 
         /**
-         * @var \App\Repository\EventRepository $eventDoctrineRepo
+         * @var \App\Infrastructure\Repository\EventRepository $eventDoctrineRepo
          */
-        $eventDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Entity\Event::class);
+        $eventDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Infrastructure\Entity\Event::class);
 
         /** @var Event $event */
         $event = $eventDoctrineRepo->findOneBy(['aggregateId' => (string)$taskId, 'aggregateType' => 'task']);
@@ -55,9 +54,9 @@ class TaskDomainServiceTest extends KernelTestCase
         );
 
         /**
-         * @var \App\Repository\EventRepository $eventDoctrineRepo
+         * @var \App\Infrastructure\Repository\EventRepository $eventDoctrineRepo
          */
-        $eventDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Entity\Event::class);
+        $eventDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Infrastructure\Entity\Event::class);
 
         $events = $eventDoctrineRepo->findBy(['aggregateId' => (string)$taskId, 'aggregateType' => 'task']);
 
@@ -80,9 +79,9 @@ class TaskDomainServiceTest extends KernelTestCase
         $this->assertInstanceOf(\App\Domain\Task\ValueObject\TaskId::class, $taskId);
 
         /**
-         * @var \App\Repository\TaskViewRepository $taskViewDoctrineRepo
+         * @var \App\Infrastructure\Repository\TaskViewRepository $taskViewDoctrineRepo
          */
-        $taskViewDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Entity\TaskView::class);
+        $taskViewDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Infrastructure\Entity\TaskView::class);
 
         $taskView = $taskViewDoctrineRepo->find($taskId);
 
@@ -112,9 +111,9 @@ class TaskDomainServiceTest extends KernelTestCase
         );
 
         /**
-         * @var \App\Repository\TaskViewRepository $taskViewDoctrineRepo
+         * @var \App\Infrastructure\Repository\TaskViewRepository $taskViewDoctrineRepo
          */
-        $taskViewDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Entity\TaskView::class);
+        $taskViewDoctrineRepo = self::getContainer()->get('doctrine')->getRepository(\App\Infrastructure\Entity\TaskView::class);
 
         $taskView = $taskViewDoctrineRepo->find($taskId);
 

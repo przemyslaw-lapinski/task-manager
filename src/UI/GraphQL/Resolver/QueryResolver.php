@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Resolver;
+namespace App\UI\GraphQL\Resolver;
 
 final class QueryResolver
 {

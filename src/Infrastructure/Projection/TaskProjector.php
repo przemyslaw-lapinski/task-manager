@@ -4,8 +4,8 @@ namespace App\Infrastructure\Projection;
 
 use App\Domain\Task\Event\TaskCreated;
 use App\Domain\Task\Event\TaskStatusUpdated;
-use App\Entity\TaskView;
-use App\Repository\TaskViewRepository;
+use App\Infrastructure\Entity\TaskView;
+use App\Infrastructure\Repository\TaskViewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Uuid;
 

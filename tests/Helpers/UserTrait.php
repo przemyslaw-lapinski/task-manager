@@ -2,7 +2,7 @@
 
 namespace App\Tests\Helpers;
 
-use App\Entity\User;
+use App\Infrastructure\Entity\User;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 trait UserTrait

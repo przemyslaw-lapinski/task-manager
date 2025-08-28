@@ -16,20 +16,20 @@ services:
     App\:
         resource: '../src/'
 
-    App\Controller\:
-        resource: '../src/Controller/'
+    App\UI\Controller\:
+        resource: '../src/UI/Controller/'
         tags: [ 'controller.service_arguments' ]
         autowire: true
         autoconfigure: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\APIClient:
+    App\Infrastructure\Service\APIClient:
         arguments:
             $baseUrl: '%env(API_BASE_URL)%'
 
-    App\GraphQL\Resolver\:
-        resource: '../src/GraphQL/Resolver'
+    App\UI\GraphQL\Resolver\:
+        resource: '../src/UI/GraphQL/Resolver'
         public: true
         autowire: true
         autoconfigure: true
