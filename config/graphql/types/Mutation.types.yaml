@@ -3,16 +3,6 @@ Mutation:
     config:
         description: "Root mutation"
         fields:
-            ping:
-                type: "String!"
-                resolve: '@=call("App\\UI\\GraphQL\\Resolver\\MutationResolver::ping")'
-
-            reverse:
-                type: "String!"
-                args:
-                    input: "String!"
-                resolve: '@=service("App\\UI\\GraphQL\\Resolver\\MutationResolver").reverse(args["input"])'
-
             createTask:
                 type: "Boolean!"
                 args:

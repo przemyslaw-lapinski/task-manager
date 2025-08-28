@@ -2,10 +2,6 @@ Query:
     type: object
     config:
         fields:
-            hello:
-                type: "String!"
-                resolve: '@=call("App\\GraphQL\\Resolver\\QueryResolver::hello")'
-
             myTasks:
                 type: "[Task!]!"
                 resolve: '@=service("App\\UI\\GraphQL\\Resolver\\TaskQueryResolver").myTasks()'
