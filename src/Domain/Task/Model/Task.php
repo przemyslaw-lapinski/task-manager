@@ -87,8 +87,8 @@ class Task
         if (!$strategy->canTransition($this->status, $newStatus)) {
             throw new \RuntimeException(sprintf(
                 'Invalid status transition from %s to %s',
-                $this->status,
-                $newStatus
+                $this->status->value,
+                $newStatus->value
             ));
         }
 
