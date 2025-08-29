@@ -1,5 +1,23 @@
 # Task Manager
 
+## Requirements
+- Symfony 7+
+- GraphQL
+- Docker
+- Event Sourcing
+- CQRS
+- Use Strategy Design Pattern
+- Use Factory Design Pattern
+
+### Features
+
+- Fetch users from [jsonplaceholder](https://jsonplaceholder.typicode.com/users) API
+- User Authentication
+- Task create ENDPOINT
+- Task update status ENDPOINT
+- Task list ENDPOINTS
+- Task change history ENDPOINT
+
 ## How to run project locally
 1. Clone the repository:
    ```bash
