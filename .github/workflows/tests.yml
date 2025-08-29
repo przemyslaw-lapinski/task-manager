@@ -1,0 +1,38 @@
+name: Tests
+on: push
+
+jobs:
+    build_and_test:
+        runs-on: ubuntu-latest
+        services:
+            pgsql:
+                image: postgres:15
+                env:
+                    POSTGRES_USER: symfony
+                    POSTGRES_PASSWORD: symfony
+                    POSTGRES_DB: symfony
+                ports:
+                    - 5432:5432
+                options: --health-cmd="pg_isready -U user" --health-interval=10s --health-timeout=5s --health-retries=3
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: '8.4'
+                extensions: pgsql, pdo, pdo_pgsql
+                ini-values: post_max_size=256M, upload_max_filesize=256M, memory_limit=512M
+                tools: composer:v2
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+            - name: Run migrations
+              run: |
+                  bin/console doctrine:database:create --if-not-exists --env=test
+                  bin/console doctrine:migrations:migrate --no-interaction --env=test
+
+            - name: Run tests
+              run: bin/phpunit --testdox
