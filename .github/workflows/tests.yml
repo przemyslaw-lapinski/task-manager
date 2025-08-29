@@ -29,6 +29,10 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
+            - name: Generate JWT keys
+              run: |
+                  bin/console lexik:jwt:generate-keypair --overwrite --no-interaction
+
             - name: Run migrations
               run: |
                   bin/console doctrine:database:create --if-not-exists --env=test
