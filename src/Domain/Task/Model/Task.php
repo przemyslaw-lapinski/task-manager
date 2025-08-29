@@ -81,7 +81,7 @@ class Task
     public function changeStatus(TaskStatus $newStatus, StatusTransitionStrategy $strategy): self
     {
         if ($this->status === $newStatus) {
-            throw new \RuntimeException('Status is already ' . $newStatus->toString());
+            throw new \RuntimeException('Status is already ' . $newStatus->value);
         }
 
         if (!$strategy->canTransition($this->status, $newStatus)) {
@@ -92,7 +92,7 @@ class Task
             ));
         }
 
-        $this->record(TaskStatusUpdated::now($this->id, $this->status, $newStatus, new \DateTimeImmutable()));
+        $this->record(TaskStatusUpdated::now($this->id, $this->status, $newStatus));
 
         return $this;
     }
